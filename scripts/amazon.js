@@ -1,4 +1,7 @@
 
+
+// TO GENERATE ALL THE ITEMS ON THE AMAZON HTML FILE USING JAVASCRIPT
+
 let productsHTML = '';
 
 products.forEach((product) => {
@@ -47,7 +50,9 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+
+          <button class="add-to-cart-button button-primary js-add-to-cart" 
+          data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>
@@ -57,7 +62,34 @@ products.forEach((product) => {
 
 });
 
-console.log(productsHTML);
+/* For the data ttribute in html kebab case (kebab-case) is converted into camel case (camelCase)*/
+
 
 document.querySelector('.js-products-grid').
 innerHTML = productsHTML;
+
+document.querySelectorAll('.js-add-to-cart')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const productId = button.dataset.productId;
+
+      let matchingItem;
+
+      cart.forEach((item) => {
+        if(productId === item.productId){
+          matchingItem = item;
+        }
+      });
+
+      if(matchingItem){
+        matchingItem.quantity++;
+      }else{
+        cart.push({
+          productId: productId,
+          quantity: 1
+        });
+      }
+
+
+    });
+  });
