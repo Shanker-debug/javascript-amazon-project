@@ -2,6 +2,10 @@
 
 // TO GENERATE ALL THE ITEMS ON THE AMAZON HTML FILE USING JAVASCRIPT
 
+
+// .. is to get out of the current folder
+import {cart} from '../data/cart.js';
+
 let productsHTML = '';
 
 products.forEach((product) => {
